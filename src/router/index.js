@@ -23,7 +23,22 @@ const router = createRouter({
             path: '/profile',
             name: 'profile',
             component: () => import('../views/Profile.vue')
-        }
+        },
+        {
+            path: '/create_blog',
+            name: 'create_blog',
+            component: () => import('../views/CreateBlog.vue')
+        },
+        {
+            path: '/update_blog/:blog_post',
+            name: 'update_blog',
+            component: () => import('../views/UpdateBlog.vue')
+        },
+        {
+            path: '/:blog_detail',
+            name: 'blog_detail',
+            component: () => import('../views/BlogDetailView.vue')
+        },
     ]
 })
 

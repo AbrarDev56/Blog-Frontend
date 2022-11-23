@@ -4,7 +4,7 @@
     import { storeToRefs } from 'pinia';
 
     const { isAuthenticated } = storeToRefs(useAuthStore())
-    
+
 </script>
 
 <template>
@@ -24,6 +24,9 @@
                     </li>
                     <li v-if="!isAuthenticated" class="nav-item">
                         <RouterLink class="nav-link active" to="/signup">Sign Up</RouterLink>
+                    </li>
+                    <li v-if="isAuthenticated" class="nav-item">
+                        <RouterLink class="nav-link active" to="/create_blog">Create Blog</RouterLink>
                     </li>
                     <li v-if="isAuthenticated" class="nav-item">
                         <RouterLink class="nav-link active" to="/profile">Profile</RouterLink>
