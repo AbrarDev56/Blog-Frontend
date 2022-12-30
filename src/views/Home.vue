@@ -18,19 +18,18 @@
 </script>
 
 <template>
-    <div v-for="blog in blogs" v-bind:key="blog.id" class="mx-3">
-        <div class="card mb-3 mt-3 mx-auto" style="max-width: 1000px;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img :src="url + blog.attributes.thumbnail.data.attributes.url" class="img-fluid">
-                </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ blog.attributes.title }}</h5>
-                        <div v-html="blog.attributes.article" class="card-text text-truncate" style="height: 75px"></div>
-                        <RouterLink :to="`${blog.id}`" class="stretched-link"></RouterLink>
-                    </div>
-                </div>
+    <div v-for="blog in blogs" v-bind:key="blog.id" class="my-3 mx-auto" style="max-width: 1000px;">
+        <div class="d-flex border rounded mx-3">
+            <div class="flex-shrink-0">
+                <RouterLink :to="`${blog.id}`">
+                    <img :src="url + blog.attributes.thumbnail.data.attributes.url" class="img-fluid rounded-start" style="max-width: 200px; max-height: 150px;">
+                </RouterLink>
+            </div>
+            <div class="flex-grow-1 ms-3">
+                <h5 class="card-title mt-2">
+                    <RouterLink :to="`${blog.id}`" class="link-dark text-decoration-none">{{ blog.attributes.title }}</RouterLink>
+                </h5>
+                <div v-html="blog.attributes.article" class="card-text text-truncate" style="height: 75px"></div>
             </div>
         </div>
     </div>

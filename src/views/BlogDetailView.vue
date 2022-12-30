@@ -30,8 +30,10 @@
 <template>
     <div class="home mx-auto px-3 mb-5" style="max-width: 1000px;">
         <h1 class="mt-2 text-center">{{ title }}</h1>
-        <img :src="url + thumbnail" class="img-fluid mb-2">
-        <b class="mt-2 text-capitalize">by {{ author }}</b>
+        <img :src="url + thumbnail" class="d-block img-fluid mb-2 mx-auto">
+        <div>
+            <b class="mt-2 text-capitalize">by {{ author }}</b>
+        </div>
         <div v-html="article"></div>
     </div>
 </template>
