@@ -96,7 +96,7 @@
 
         <form v-on:submit.prevent="updateBlog(id)">
             <div class="form-floating mb-3">
-                <input v-model="title" type="text" class="form-control" id="floatingInput">
+                <input v-model.lazy="title" type="text" class="form-control" id="floatingInput">
                 <label for="floatingInput">Title</label>
             </div>
             <div class="mb-3">
@@ -104,17 +104,19 @@
                 <input @change="onFileUpload" class="form-control" type="file" id="formFile">
             </div>
             <div class="form-floating">
-                <textarea v-model="article" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea v-model.lazy="article" class="form-control" id="floatingTextarea2" style="height: 300px"></textarea>
                 <label for="floatingTextarea2">Article</label>
             </div>
             <button class="btn btn-outline-primary mt-2">Update</button>
         </form>
     </div>
 
-    <div class="mx-auto px-3 mb-5" style="max-width: 1000px;">
-        <h1 class="title mt-2 text-center">{{ title }}</h1>
-        <img :src="url + thumbnail" class="img-fluid mb-2">
-        <b class="mt-2 text-capitalize">by {{ author }}</b>
+    <div class="home mx-auto px-3 mb-5" style="max-width: 1000px;">
+        <h1 class="mt-2 text-center">{{ title }}</h1>
+        <img :src="url + thumbnail" class="d-block img-fluid mb-2 mx-auto">
+        <div class="mb-3">
+            <b class="mt-2 text-capitalize">by {{ author }}</b>
+        </div>
         <div v-html="article"></div>
     </div>
 </template>

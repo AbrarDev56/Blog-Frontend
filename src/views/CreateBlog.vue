@@ -90,6 +90,7 @@
 
                 axios.delete(`upload/files/${upload_id}`)
                     .then(response => {
+                        location.reload();
                         console.log(response)
                     })
                     .catch(error => {
@@ -114,7 +115,7 @@
                 <input @change="onFileUpload" class="form-control" type="file" id="formFile">
             </div>
             <div class="form-floating">
-                <textarea v-model="article" class="form-control" id="floatingTextarea2" style="height: 100px"></textarea>
+                <textarea v-model="article" class="form-control" id="floatingTextarea2" style="height: 200px"></textarea>
                 <label for="floatingTextarea2">Article</label>
             </div>
             <button class="btn btn-outline-primary mt-2">Submit</button>
@@ -125,16 +126,34 @@
         <div class="card mb-3 mt-3 mx-auto" style="max-width: 1000px;">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img :src="url + blog.attributes.thumbnail.data.attributes.url" class="img-fluid">
+                    <img :src="url + blog.attributes.thumbnail.data.attributes.url" class="img-fluid rounded-start">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="card-title">{{ blog.attributes.title }}</h5>
-                        <div v-html="blog.attributes.article" class="card-text text-truncate" style="height: 75px"></div>
+                        <h1 class="card-title">{{ blog.attributes.title }}</h1>
+                        <p class="card-text"><small class="text-muted">{{ blog.attributes.updatedAt }}</small></p>
                     </div>
                     <div class="card-body">
                         <div>
-                            <button @click="deleteBlog(blog.id)" class="btn btn-outline-danger float-end mb-3">Delete</button>
+                            <button class="btn btn-outline-danger float-end mb-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Blog Deletion </h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to delete?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                                            <button @click="deleteBlog(blog.id)" type="button" class="btn btn-danger">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                             <button class="btn btn-outline-primary float-end me-3 mb-3">
                                 <RouterLink :to="`/update_blog/${blog.id}`" class="text-decoration-none">Update</RouterLink>
                             </button>
