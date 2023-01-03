@@ -30,7 +30,7 @@
 
     function Logout() {
         removeToken()
-        router.push('login')
+        router.push('/login')
     }
 
     const { isAuthenticated } = storeToRefs(useAuthStore())
@@ -56,7 +56,7 @@
                         <RouterLink class="nav-link active" to="/signup">Sign Up</RouterLink>
                     </li>
                     <li v-if="isAuthenticated" class="nav-item">
-                        <RouterLink class="nav-link active" to="/create_blog">Manage Blogs</RouterLink>
+                        <RouterLink class="nav-link active" to="/create_blog">Create Blogs</RouterLink>
                     </li>
                     <li v-if="isAuthenticated" class="nav-item dropdown">
                         <a class="nav-link active dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">

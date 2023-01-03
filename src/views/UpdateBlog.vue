@@ -71,7 +71,7 @@
     //         console.log(error)
     //     })
     // }
-    
+
     function updateBlog(blog_id) {
         axios.defaults.headers.common['Authorization'] = `Bearer ${authStore.token}`;
         axios.put(`blogs/${blog_id}`, {
@@ -83,6 +83,26 @@
             .then(response => {
                 window.alert("Blog Updated");
                 console.log(response.data.data)
+            })
+            .catch(error => {
+                console.log(error)
+            })
+    }
+    function deleteBlog(blog_id) {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${authStore.token}`;
+        axios.delete(`blogs/${blog_id}?populate=*`)
+            .then(response => {
+                console.log(response.data.data)
+                console.log(response.data.data.attributes.thumbnail.data.id)
+                const upload_id = response.data.data.attributes.thumbnail.data.id
+                axios.delete(`upload/files/${upload_id}`)
+                    .then(response => {
+                        location.replace('/create_blog')
+                        console.log(response)
+                    })
+                    .catch(error => {
+                        console.log(error)
+                    })
             })
             .catch(error => {
                 console.log(error)
@@ -111,7 +131,29 @@
         </form>
     </div>
 
-    <div class="home mx-auto px-3 mb-5" style="max-width: 1000px;">
+    <div class="d-flex justify-content-end">
+        <button class="btn btn-outline-danger mt-2 me-3" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+    </div>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Blog Deletion </h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                    <button @click="deleteBlog(id)" type="button" class="btn btn-danger">Yes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="home mx-auto px-3" style="max-width: 1000px;">
         <h1 class="mt-2 text-center">{{ title }}</h1>
         <img :src="url + thumbnail" class="d-block img-fluid mb-2 mx-auto">
         <div class="mb-3">
