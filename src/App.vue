@@ -49,6 +49,9 @@
                     <li class="nav-item">
                         <RouterLink class="nav-link active" aria-current="page" to="/">Home</RouterLink>
                     </li>
+                    <li class="nav-item">
+                        <RouterLink class="nav-link active" aria-current="page" to="/search">Search</RouterLink>
+                    </li>
                     <li v-if="!isAuthenticated" class="nav-item">
                         <RouterLink class="nav-link active" to="/login">Login</RouterLink>
                     </li>

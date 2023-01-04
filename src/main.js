@@ -5,6 +5,8 @@ import App from './App.vue'
 import router from './router'
 import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import axios from 'axios'
+import InstantSearch from 'vue-instantsearch/vue3/es'
+// import InstantSearch from 'vue-instantsearch'
 
 axios.defaults.baseURL = 'http://localhost:1337/api/'
 
@@ -15,6 +17,7 @@ const pinia = createPinia()
 
 pinia.use(piniaPluginPersistedstate)
 
+app.use(InstantSearch)
 app.use(pinia)
 app.use(router, axios)
 
